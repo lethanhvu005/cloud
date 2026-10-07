@@ -31,6 +31,8 @@ Chọn New → Web Service. Kết nối GitHub và chọn `lethanhvu005/cloud`. 
 
 ## Bước 4 — Chọn gói
 
+Người dùng đã chọn **Free**. `render.yaml` đã cấu hình `plan: free`; không cần chọn Starter. Free có chế độ ngủ khi không có truy cập, vì vậy bản triển khai này chưa đáp ứng yêu cầu luôn chạy 24/7 của đề.
+
 Starter hiện được niêm yết khoảng 7 USD/tháng cho compute; kiểm tra tổng phí trên giao diện trước khi tạo. Đây là gói có phí, cần người dùng đồng ý. Free ngủ sau thời gian không hoạt động nên không đáp ứng yêu cầu luôn chạy của đề. Không có gói nào bảo đảm tuyệt đối không gián đoạn.
 
 Ảnh: `04-instance-plan.png` — gói đã chọn, không chụp thông tin thanh toán.

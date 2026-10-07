@@ -2,7 +2,7 @@ services:
   - type: web
     name: cloud-book-manager
     runtime: node
-    plan: starter
+    plan: free
     buildCommand: npm ci
     startCommand: npm run start:cloud
     healthCheckPath: /health
