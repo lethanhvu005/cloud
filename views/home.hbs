@@ -1,12 +1,13 @@
-<section class="intro"><p class="eyebrow">THƯ VIỆN CỦA BẠN</p><h1>Mỗi cuốn sách,<br>một điều mới.</h1><p>Thêm và quản lý danh mục sách trong một không gian.</p><div class="tags"><span>{{books.length}} sách gần nhất</span><span>VAT {{student.vat}}%</span><span>Lượt xem trong phiên: {{visits}}</span></div></section>
+<h1>Quản lý sách</h1>
+<p>Lượt xem trong phiên: {{visits}}</p>
 {{#if success}}<p class="notice" role="status">{{success}}</p>{{/if}}
 {{#if error}}<p class="notice error" role="alert">{{error}}</p>{{/if}}
-<div class="grid"><section class="panel"><p class="eyebrow">01 / THÊM MỚI</p><h2>Thêm một cuốn sách</h2><form action="/books" method="post">
+<div><section><h2>Thêm sách</h2><form action="/books" method="post">
 <input type="hidden" name="_csrf" value="{{csrf}}">
 <label for="code">Mã sách</label><input id="code" name="code" value="{{values.code}}" placeholder="{{student.prefix}}-001" maxlength="40" required><small>Bắt đầu bằng {{student.prefix}} (3 số cuối MSSV).</small>
 <label for="title">Tên sách</label><input id="title" name="title" value="{{values.title}}" maxlength="200" required>
 <label for="author">Tác giả</label><input id="author" name="author" value="{{values.author}}" maxlength="120" required>
 <label for="price">Giá trước thuế (VNĐ)</label><input id="price" name="price" type="number" value="{{values.price}}" min="0" max="999999999" step="1" required><small>Giá sau thuế được tự động tính với VAT {{student.vat}}%.</small>
-<button type="submit">+ Thêm vào thư viện</button></form></section>
-<section class="panel catalogue"><p class="eyebrow">02 / DANH MỤC</p><h2>Sách trong thư viện</h2><p class="muted">Hiển thị tối đa 100 sách mới nhất.</p>
-{{#if books}}<div class="table-wrap"><table><thead><tr><th>Sách / Tác giả</th><th>Mã sách</th><th>Giá gốc</th><th>VAT</th><th>Sau thuế</th></tr></thead><tbody>{{#each books}}<tr><td><strong>{{title}}</strong><small>{{author}}</small></td><td>{{code}}</td><td>{{money price}}</td><td>{{vat}}%</td><td class="total">{{money priceAfterTax}}</td></tr>{{/each}}</tbody></table></div>{{else}}<div class="empty"><span>▤</span><h3>Thư viện đang chờ cuốn sách đầu tiên</h3><p>Điền thông tin bên cạnh để bắt đầu.</p></div>{{/if}}</section></div>
+<button type="submit">Thêm sách</button></form></section>
+<section><h2>Danh sách sách</h2><p>Hiển thị tối đa 100 sách mới nhất.</p>
+{{#if books}}<div class="table-wrap"><table><thead><tr><th>Sách / Tác giả</th><th>Mã sách</th><th>Giá gốc</th><th>VAT</th><th>Sau thuế</th></tr></thead><tbody>{{#each books}}<tr><td><strong>{{title}}</strong><small>{{author}}</small></td><td>{{code}}</td><td>{{money price}}</td><td>{{vat}}%</td><td class="total">{{money priceAfterTax}}</td></tr>{{/each}}</tbody></table></div>{{else}}<p>Chưa có sách.</p>{{/if}}</section></div>

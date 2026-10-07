@@ -15,11 +15,11 @@ services:
         sync: false
       - key: STUDENT_ID
         sync: false
-      - key: MONGODB_READ_URI
+      - key: MONGO_URI_READ
         sync: false
-      - key: MONGODB_WRITE_URI
+      - key: MONGO_URI_WRITE
         sync: false
-      - key: MONGODB_SESSION_URI
+      - key: SESSION_URI
         sync: false
       - key: SESSION_SECRET
         generateValue: true

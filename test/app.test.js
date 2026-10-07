@@ -11,13 +11,22 @@ test('prefix, dynamic VAT and integer rounding', () => {
   const book = validateBook(valid, settings);
   assert.equal(book.priceAfterTax, 110001);
   for (let digit = 0; digit <= 9; digit++) {
-    const cfg = config({ STUDENT_NAME: 'Test', STUDENT_ID: `12345${digit}`, SESSION_SECRET: settings.secret, MONGODB_READ_URI: 'read', MONGODB_WRITE_URI: 'write', MONGODB_SESSION_URI: 'session' });
+    const cfg = config({ STUDENT_NAME: 'Test', STUDENT_ID: `12345${digit}`, SESSION_SECRET: settings.secret, MONGO_URI_READ: 'read', MONGO_URI_WRITE: 'write', MONGO_URI_SESSION: 'session' });
     assert.equal(cfg.vat, digit + 4);
     assert.equal(cfg.dbName, `DB_12345${digit}`);
   }
 });
 test('reject invalid prefix, prices and structured fields', () => {
   for (const change of [{ code: '000-001' }, { price: '-1' }, { price: '1.5' }, { price: '' }, { price: '1e3' }, { price: '1000000000' }, { title: { $ne: null } }]) assert.throws(() => validateBook({ ...valid, ...change }, settings));
+});
+test('alphanumeric student ID 23IT316 maps to correct database, prefix and VAT', () => {
+  const env = { STUDENT_NAME: 'Test', STUDENT_ID: '23IT316', SESSION_SECRET: settings.secret, MONGO_URI_READ: 'read', MONGO_URI_WRITE: 'write', MONGO_URI_SESSION: 'session' };
+  const cfg = config(env);
+  assert.equal(cfg.dbName, 'DB_23IT316');
+  assert.equal(cfg.prefix, '316');
+  assert.equal(cfg.vat, 10);
+  assert.equal(validateBook({ ...valid, code: '316-001', price: '100000' }, cfg).priceAfterTax, 110000);
+  for (const id of ['23IT31X', '../316', '31', '23 IT316']) assert.throws(() => config({ ...env, STUDENT_ID: id }));
 });
 test('HTTP add/list, validation, CSRF, escaping, duplicate and cross-instance session', async () => {
   const books = [];
