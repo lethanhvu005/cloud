@@ -1,0 +1,26 @@
+{
+  "name": "cloud-book-manager",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node --env-file=.env src/server.js",
+    "start:cloud": "node src/server.js",
+    "test": "node --test",
+    "check": "node --check src/server.js"
+  },
+  "dependencies": {
+    "connect-mongo": "^6.0.0",
+    "express": "^5.2.1",
+    "express-handlebars": "^9.0.2",
+    "express-session": "^1.19.0",
+    "helmet": "^8.3.0",
+    "mongodb": "^7.7.0"
+  },
+  "devDependencies": {
+    "supertest": "^7.3.1"
+  }
+}
