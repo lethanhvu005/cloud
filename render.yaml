@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: cloud-book-manager
+    runtime: node
+    plan: starter
+    buildCommand: npm ci
+    startCommand: npm run start:cloud
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: 24.14.0
+      - key: STUDENT_NAME
+        sync: false
+      - key: STUDENT_ID
+        sync: false
+      - key: MONGODB_READ_URI
+        sync: false
+      - key: MONGODB_WRITE_URI
+        sync: false
+      - key: MONGODB_SESSION_URI
+        sync: false
+      - key: SESSION_SECRET
+        generateValue: true
